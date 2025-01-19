@@ -1,16 +1,16 @@
 import { useState } from "react"
 
 const postTitlesList = [
-  "Exploring the Wonders of the Grand Canyon",
-  "A Journey Through the Streets of Tokyo",
-  "Discovering the Hidden Gems of Paris",
-  "Adventures in the Australian Outback",
-  "A Foodie's Guide to Italy",
-  "The Best Beaches in the Caribbean",
-  "Hiking the Trails of the Swiss Alps",
-  "Cultural Experiences in India",
-  "Road Trip Across the United States",
-  "A Safari Adventure in South Africa"
+  { id: 1, title: "Exploring the Wonders of the Grand Canyon" },
+  { id: 2, title: "A Journey Through the Streets of Tokyo" },
+  { id: 3, title: "Discovering the Hidden Gems of Paris" },
+  { id: 4, title: "Adventures in the Australian Outback" },
+  { id: 5, title: "A Foodie's Guide to Italy" },
+  { id: 6, title: "The Best Beaches in the Caribbean" },
+  { id: 7, title: "Hiking the Trails of the Swiss Alps" },
+  { id: 8, title: "Cultural Experiences in India" },
+  { id: 9, title: "Road Trip Across the United States" },
+  { id: 10, title: "A Safari Adventure in South Africa" }
 ];
 
 const App = () => {
@@ -21,7 +21,19 @@ const App = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     setPostTitle([newTitle, ...postTitle])
+  }
 
+  const newTitleHandler = (e) => {
+    const newTitle = {
+      id: postTitle.length + 1,
+      title: e.target.value
+    }
+    setNewTitle(newTitle)
+  }
+
+  const removeHandler = (id) => {
+    const newPostList = postTitle.filter(title => title.id !== id)
+    setPostTitle(newPostList)
   }
   return (
     <div className="container my-5">
@@ -34,15 +46,18 @@ const App = () => {
               type="text"
               className="form-control"
               placeholder="Titolo"
-              value={newTitle}
-              onChange={((e) => setNewTitle(e.target.value))}
+              value={newTitle.title}
+              onChange={newTitleHandler}
             />
             <button className="btn btn-success my-3" type="submit"> Invia</button>
           </form>
 
           <ul className="list-group">
-            {postTitle.map((title, index) => (
-              <li key={index} className="list-group-item">{title}</li>
+            {postTitle.map(item => (
+              <li key={item.id} className="list-group-item d-flex justify-content-between">
+                {item.title}
+                <i className="fa-solid fa-square-minus remove" onClick={() => removeHandler(item.id)}></i>
+              </li>
             ))}
           </ul>
         </div>
