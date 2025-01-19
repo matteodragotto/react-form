@@ -1,5 +1,18 @@
 import { useState } from "react"
 
+const postTitlesList = [
+  "Exploring the Wonders of the Grand Canyon",
+  "A Journey Through the Streets of Tokyo",
+  "Discovering the Hidden Gems of Paris",
+  "Adventures in the Australian Outback",
+  "A Foodie's Guide to Italy",
+  "The Best Beaches in the Caribbean",
+  "Hiking the Trails of the Swiss Alps",
+  "Cultural Experiences in India",
+  "Road Trip Across the United States",
+  "A Safari Adventure in South Africa"
+];
+
 const App = () => {
 
   const [postTitle, setPostTitle] = useState('')
@@ -24,8 +37,11 @@ const App = () => {
             <button className="btn btn-success my-3" type="submit"> Invia</button>
           </form>
 
-
-
+          <ul className="list-group">
+            {postTitlesList.map((title, index) => (
+              <li key={index} className="list-group-item">{title}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
