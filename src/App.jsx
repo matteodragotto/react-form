@@ -15,10 +15,13 @@ const postTitlesList = [
 
 const App = () => {
 
-  const [postTitle, setPostTitle] = useState('')
+  const [postTitle, setPostTitle] = useState(postTitlesList)
+  const [newTitle, setNewTitle] = useState('')
+
   const submitHandler = (e) => {
     e.preventDefault()
-    alert('Titolo registrato')
+    setPostTitle([newTitle, ...postTitle])
+
   }
   return (
     <div className="container my-5">
@@ -31,14 +34,14 @@ const App = () => {
               type="text"
               className="form-control"
               placeholder="Titolo"
-              value={postTitle}
-              onChange={((e) => setPostTitle(e.target.value))}
+              value={newTitle}
+              onChange={((e) => setNewTitle(e.target.value))}
             />
             <button className="btn btn-success my-3" type="submit"> Invia</button>
           </form>
 
           <ul className="list-group">
-            {postTitlesList.map((title, index) => (
+            {postTitle.map((title, index) => (
               <li key={index} className="list-group-item">{title}</li>
             ))}
           </ul>
